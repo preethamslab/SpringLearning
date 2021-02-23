@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  qrcodemapper:
+    image: preethamru/mmv2-qrcodemapper:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - 5400:5400
+    depends_on:
+      - postgres
+    networks:
+      - currency-network
+  
+  
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=qrdb
+        
+    networks:
+      - currency-network
+networks:
+  currency-network:
+  
